@@ -1,1 +1,2 @@
-diary_api/
+.env
+.env.local
