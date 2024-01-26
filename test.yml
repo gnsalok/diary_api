@@ -1,0 +1,19 @@
+name: Docker PS Example
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  docker-ps:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check Docker Version
+      run: |
+        echo "Checking Docker version:"
+        docker --version
+
+    - name: Run Docker PS
+      run: docker ps
