@@ -3,9 +3,12 @@ package controller
 import (
 	"diary_api/helper"
 	"diary_api/model"
+	"errors"
+	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	"github.com/go-playground/validator/v10"
 )
 
 func Register(context *gin.Context) {
@@ -35,7 +38,17 @@ func Login(context *gin.Context) {
 	var input model.Auth
 
 	if err := context.ShouldBindJSON(&input); err != nil {
-		context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		var errorMessage string
+
+		// Implementing TDD
+		var validationErrors validator.ValidationErrors
+		if errors.As(err, &validationErrors) {
+			validationError := validationErrors[0]
+			if validationError.Tag() == "required" {
+				errorMessage = fmt.Sprintf("%s not provided", validationError.Field())
+			}
+		}
+		context.JSON(http.StatusBadRequest, gin.H{"error": errorMessage})
 		return
 	}
 

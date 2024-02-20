@@ -6,8 +6,8 @@
 - Install `psql` which is interface to Postgress.
 
 ### Run Postgres Service using brew 
-- Start service : `brew services start postgresql`
-- Stop service : `brew services stop postgresql`
+- Start service : `brew services start postgresql@15`
+- Stop service : `brew services stop postgresql@15`
 
 
 
@@ -37,9 +37,3 @@ Example :
 ![Alt text](image.png)
 
 ![Alt text](image-1.png)
-
-
-
-
-
-
